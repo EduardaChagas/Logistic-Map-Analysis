@@ -119,12 +119,12 @@ Entropy.Complexity = matrix(nrow = length(r)*16, ncol = 2)
 D = tau = c(3, 4, 5, 6)
 for(d in D){
     j = 1
-    for(i in 1:length(r)){
+    for(rr in r){
       series =  series.generator.map(rr)
       g = TG(series, d, d)
       Entropy.Complexity[j, 1] <- shannonNormalized(as.vector(g))
       Entropy.Complexity[j, 2] <- Ccomplexity(as.vector(g))
-      cat("D: ", d, " - tal: ", t, " - index: ", i, "\n")
+      cat("D: ", d, " - tal: ", d, " - index: ", j, "\n")
       j = j + 1
     }
 }
