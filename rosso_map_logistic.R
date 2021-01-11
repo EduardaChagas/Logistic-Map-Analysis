@@ -6,6 +6,10 @@
 
 ############################################# Packages #################################################
 if(!require(gtools)) install.packages("gtools")
+if(!require(doParallel)){
+  install.packages("doParallel")
+  require(doParallel)
+}
 source("theory_information.R")
 
 ######################################Bandt-Pompe functions #############################################
