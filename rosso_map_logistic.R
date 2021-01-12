@@ -121,7 +121,6 @@ series.generator.map <- function(r){
 hc.analysis <- function(parameter){
   
   j = 1
-  D = tau = c(3, 4, 5, 6)
   r = seq(from = 3.5, to = 4.0, by = 0.01)
   Entropy.Complexity = matrix(nrow = length(r)*4, ncol = 2)
   
@@ -130,18 +129,16 @@ hc.analysis <- function(parameter){
       g = TG(series, parameter, parameter)
       Entropy.Complexity[j, 1] <- shannonNormalized(as.vector(g))
       Entropy.Complexity[j, 2] <- Ccomplexity(as.vector(g))
-      cat("D: ", parameter, " - tal: ", parameter, " - index: ", j, "\n")
       j = j + 1
   }
-  
+  cat("D: ", parameter, " - tal: ", parameter, "\n")
   write.csv(Entropy.Complexity, paste0("Data/HCD", parameter, "T", parameter, ".csv"))
 }
 
 
-#registerDoParallel(cores = 3)
+registerDoParallel(cores = 4)
 foreach(i = 3:6) %dopar% {
   hc.analysis(i)
-  cat("Analysing D ", i, " and j ", i, "\n")
 }
 
 
