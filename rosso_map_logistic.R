@@ -104,6 +104,14 @@ TG <- function(series, dimension, delay){
   return(probability)
 }
 
+bandt.pompe <- function(series, dimension, delay){
+  dyn.load("BandtPompe.so")
+  elements = formationPattern(series, dimension, delay, 1)
+  element.size = dim(elements)[1]
+  probability <- .Call("BandtPompe", elements, dimension, element.size)
+  return(probability)
+}
+
 series.generator.map <- function(r){
   time.series <- vector(mode="numeric", length = 10^6)
   index = 1
@@ -125,13 +133,13 @@ hc.analysis <- function(dimension){
   
   for(rr in r){
       series =  series.generator.map(rr)
-      g = TG(series, dimension, 1)
+      g = bandt.pompe(series, dimension, 1)
       Entropy.Complexity[j, 1] <- shannonNormalized(as.vector(g))
       Entropy.Complexity[j, 2] <- Ccomplexity(as.vector(g))
       j = j + 1
   }
   cat("D: ", dimension, " - tal: ", 1, "\n")
-  write.csv(Entropy.Complexity, paste0("Data/HCD", dimension, "T", 1, ".csv"))
+  write.csv(Entropy.Complexity, paste0("Data/BP_HC_D", dimension, "T", 1, ".csv"))
 }
 
 

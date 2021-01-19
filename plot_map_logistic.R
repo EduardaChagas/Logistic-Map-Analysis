@@ -42,32 +42,32 @@ plot.TG.analysis <- function(){
   n.total = 51
   
   d = tau = 3 
-  Entropy.Complexity.csv = read.csv(file="Data/HCD3T3.csv", header=TRUE, sep=",")
+  Entropy.Complexity.csv = read.csv(file="Data/HCD3T1.csv", header=TRUE, sep=",")
   Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
   Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
   Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
-  plots[[1]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 3, Delay = 3")))
+  plots[[1]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 3, Delay = 1")))
   
   d = tau = 4
-  Entropy.Complexity.csv = read.csv(file="Data/HCD4T4.csv", header=TRUE, sep=",")
+  Entropy.Complexity.csv = read.csv(file="Data/HCD4T1.csv", header=TRUE, sep=",")
   Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
   Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
   Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
-  plots[[2]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 4, Delay = 4")))
+  plots[[2]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 4, Delay = 1")))
   
   d = tau = 5
-  Entropy.Complexity.csv = read.csv(file="Data/HCD5T5.csv", header=TRUE, sep=",")
+  Entropy.Complexity.csv = read.csv(file="Data/HCD5T1.csv", header=TRUE, sep=",")
   Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
   Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
   Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
-  plots[[3]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 5, Delay = 5")))
+  plots[[3]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 5, Delay = 1")))
   
   d = tau = 6
-  Entropy.Complexity.csv = read.csv(file="Data/HCD6T6.csv", header=TRUE, sep=",")
+  Entropy.Complexity.csv = read.csv(file="Data/HCD6T1.csv", header=TRUE, sep=",")
   Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
   Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
   Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
-  plots[[4]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 6, Delay = 6")))
+  plots[[4]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 6, Delay = 1")))
   
   pdf("HCAnalysis.pdf", width = 10, height = 7) 
   ggarrange(plots[[1]], plots[[2]], plots[[3]], plots[[4]],
