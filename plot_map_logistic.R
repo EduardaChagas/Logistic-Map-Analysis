@@ -23,7 +23,7 @@ HC.Plane.no.cota <- function(dimension, signal.values){
   #YMAX = max(signal.values[,2])
   signal.values = data.frame("H" = signal.values[,1], "C" = signal.values[,2])
   
-  p = cotas(factorial(dimension)^2)
+  p = cotas(dimension)
   p = p + 
     geom_point(data = signal.values, aes(x = H, y = C), size = 2) +
     labs(x = TeX("\\textit{H}"), y = TeX("\\textit{C}"))  +
@@ -42,28 +42,28 @@ plot.TG.analysis <- function(){
   n.total = 51
   
   d = tau = 3 
-  Entropy.Complexity.csv = read.csv(file="Data/HCD3T1.csv", header=TRUE, sep=",")
+  Entropy.Complexity.csv = read.csv(file="Data/BP_HC_D3T1.csv", header=TRUE, sep=",")
   Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
   Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
   Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
   plots[[1]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 3, Delay = 1")))
   
   d = tau = 4
-  Entropy.Complexity.csv = read.csv(file="Data/HCD4T1.csv", header=TRUE, sep=",")
+  Entropy.Complexity.csv = read.csv(file="Data/BP_HC_D4T1.csv", header=TRUE, sep=",")
   Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
   Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
   Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
   plots[[2]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 4, Delay = 1")))
   
   d = tau = 5
-  Entropy.Complexity.csv = read.csv(file="Data/HCD5T1.csv", header=TRUE, sep=",")
+  Entropy.Complexity.csv = read.csv(file="Data/BP_HC_D5T1.csv", header=TRUE, sep=",")
   Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
   Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
   Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
   plots[[3]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 5, Delay = 1")))
   
   d = tau = 6
-  Entropy.Complexity.csv = read.csv(file="Data/HCD6T1.csv", header=TRUE, sep=",")
+  Entropy.Complexity.csv = read.csv(file="Data/BP_HC_D6T1.csv", header=TRUE, sep=",")
   Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
   Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
   Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
