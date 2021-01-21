@@ -17,15 +17,11 @@ source("theory_information.R")
 
 HC.Plane.no.cota <- function(dimension, signal.values){
   
-  #XMIN = min(signal.values[,1]) + 0.0005
-  #XMAX = min(max(signal.values[,1]) + 0.0005, 1)
-  #YMIN = max(0,min(signal.values[,2]))
-  #YMAX = max(signal.values[,2])
-  signal.values = data.frame("H" = signal.values[,1], "C" = signal.values[,2])
+  signal.values = data.frame("H" = signal.values[,1], "C" = signal.values[,2], "Rho" = factor(c(rep("3.5 - 3.99", 50), "4.0")))
   
   p = cotas(dimension)
   p = p + 
-    geom_point(data = signal.values, aes(x = H, y = C), size = 2) +
+    geom_point(data = signal.values, aes(x = H, y = C, color = Rho), size = 2) +
     labs(x = TeX("\\textit{H}"), y = TeX("\\textit{C}"))  +
     scale_shape_identity() +
     #xlim(limits=c(XMIN, XMAX)) + ylim(limits=c(YMIN, YMAX)) + 
@@ -36,43 +32,47 @@ HC.Plane.no.cota <- function(dimension, signal.values){
   return(p)
 }
 
-plot.TG.analysis <- function(){
+plot.BP.analysis <- function(){
   
   plots = array(list(), 4)
   n.total = 51
   
-  d = tau = 3 
-  Entropy.Complexity.csv = read.csv(file="Data/BP_HC_D3T1.csv", header=TRUE, sep=",")
+  d = 3
+  tau = 1 
+  Entropy.Complexity.csv = read.csv(file="Data/BP_HC_D3T3.csv", header=TRUE, sep=",")
   Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
   Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
   Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
-  plots[[1]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 3, Delay = 1")))
+  plots[[1]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 3, Delay = 3")))
   
-  d = tau = 4
-  Entropy.Complexity.csv = read.csv(file="Data/BP_HC_D4T1.csv", header=TRUE, sep=",")
+  d = 4
+  tau = 1
+  Entropy.Complexity.csv = read.csv(file="Data/BP_HC_D4T4.csv", header=TRUE, sep=",")
   Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
   Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
   Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
-  plots[[2]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 4, Delay = 1")))
+  plots[[2]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 4, Delay = 4")))
   
-  d = tau = 5
-  Entropy.Complexity.csv = read.csv(file="Data/BP_HC_D5T1.csv", header=TRUE, sep=",")
+  d = 5
+  tau = 1
+  Entropy.Complexity.csv = read.csv(file="Data/BP_HC_D5T5.csv", header=TRUE, sep=",")
   Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
   Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
   Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
-  plots[[3]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 5, Delay = 1")))
+  plots[[3]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 5, Delay = 5")))
   
-  d = tau = 6
-  Entropy.Complexity.csv = read.csv(file="Data/BP_HC_D6T1.csv", header=TRUE, sep=",")
+  d = 6
+  tau = 1
+  Entropy.Complexity.csv = read.csv(file="Data/BP_HC_D6T6.csv", header=TRUE, sep=",")
   Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
   Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
   Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
-  plots[[4]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 6, Delay = 1")))
+  plots[[4]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 6, Delay = 6")))
   
   pdf("HCAnalysis.pdf", width = 10, height = 7) 
   ggarrange(plots[[1]], plots[[2]], plots[[3]], plots[[4]],
             ncol = 2, nrow = 2, common.legend = TRUE, legend = "right") + 
-    labs(title = "Ordinal Patterns Transition Graphs") +           
+    labs(title = "Bandt-Pompe") +
     labs(x = TeX("\\textit{Normalized Entropy}"), y = TeX("\\textit{Statistical Complexity}"))  +
     theme_igray() + theme(text = element_text(size = 16, family="Times", face="italic"), plot.title = element_text(hjust = 0.5)) + 
     guides(colour = guide_legend(override.aes = list(size = 3)))

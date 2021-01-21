@@ -125,13 +125,13 @@ hc.analysis <- function(dimension){
   
   for(rr in r){
     series =  series.generator.map(rr)
-    g = TG(series, dimension, 1)
+    g = TG(series, dimension, dimension)
     Entropy.Complexity[j, 1] <- shannonNormalized(as.vector(g))
     Entropy.Complexity[j, 2] <- Ccomplexity(as.vector(g))
     j = j + 1
   }
   cat("D: ", dimension, " - tal: ", 1, "\n")
-  write.csv(Entropy.Complexity, paste0("Data/TG_HC_D", dimension, "T", 1, ".csv"))
+  write.csv(Entropy.Complexity, paste0("Data/TG_HC_D", dimension, "T", dimension, ".csv"))
 }
 
 
