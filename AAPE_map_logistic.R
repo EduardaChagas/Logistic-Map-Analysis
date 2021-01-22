@@ -107,7 +107,7 @@ aape.analysis <- function(dimension){
 
 registerDoParallel(cores = 4)
 foreach(i = 3:6) %dopar% {
-  hc.analysis(i)
+  aape.analysis(i)
 }
 
 
