@@ -231,3 +231,51 @@ plot.FGPE.analysis <- function(){
     guides(colour = guide_legend(override.aes = list(size = 3)))
   dev.off() 
 }
+
+
+plot.AAPE.analysis <- function(){
+  
+  plots = array(list(), 4)
+  n.total = 51
+  
+  d = 3
+  tau = 1 
+  Entropy.Complexity.csv = read.csv(file="Data/AAPE_HC_D3T1.csv", header=TRUE, sep=",")
+  Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
+  Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
+  Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
+  plots[[1]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 3, Delay = 1")))
+  
+  d = 4
+  tau = 1
+  Entropy.Complexity.csv = read.csv(file="Data/AAPE_HC_D4T1.csv", header=TRUE, sep=",")
+  Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
+  Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
+  Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
+  plots[[2]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 4, Delay = 1")))
+  
+  d = 5
+  tau = 1
+  Entropy.Complexity.csv = read.csv(file="Data/AAPE_HC_D5T1.csv", header=TRUE, sep=",")
+  Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
+  Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
+  Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
+  plots[[3]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 5, Delay = 1")))
+  
+  d = 6
+  tau = 1
+  Entropy.Complexity.csv = read.csv(file="Data/AAPE_HC_D6T1.csv", header=TRUE, sep=",")
+  Entropy.Complexity = matrix(nrow = n.total, ncol = 2)
+  Entropy.Complexity[,1] = Entropy.Complexity.csv[1:n.total, 'V1']
+  Entropy.Complexity[,2] = Entropy.Complexity.csv[1:n.total, 'V2']
+  plots[[4]] = HC.Plane.no.cota(d, Entropy.Complexity) + ggtitle(expression(italic("Dimension = 6, Delay = 1")))
+  
+  pdf("AAPE_T1.pdf", width = 10, height = 7) 
+  ggarrange(plots[[1]], plots[[2]], plots[[3]], plots[[4]],
+            ncol = 2, nrow = 2, common.legend = TRUE, legend = "right") + 
+    labs(title = "AAPE") +
+    labs(x = TeX("\\textit{Normalized Entropy}"), y = TeX("\\textit{Statistical Complexity}"))  +
+    theme_igray() + theme(text = element_text(size = 16, family="Times", face="italic"), plot.title = element_text(hjust = 0.5)) + 
+    guides(colour = guide_legend(override.aes = list(size = 3)))
+  dev.off() 
+}
