@@ -16,10 +16,14 @@
 
 <img src="Images/TG_TD.png" />
 
+#### WPE with delay = 1
+
+<img src="Images/WPE_T1.png" />
+
 #### FGPE with delay = 1
 
 <img src="Images/FGPE_T1.png" />
 
-#### WPE with delay = 1
+#### AAPE with delay = 1
 
-<img src="Images/WPE_T1.png" />
+<img src="Images/AAPE_T1.png" />
